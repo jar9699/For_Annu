@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Annu</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #ffd6e0, #ff9eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+.card {
+    background: white;
+    width: 420px;
+    max-width: 92vw;
+    border-radius: 28px;
+    padding: 40px 32px;
+    text-align: center;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    margin: 0 0 26px;
+    font-size: 26px;
+    font-weight: 600;
+    color: #ff4d6d;
+    white-space: nowrap;
+}
+
+.hidden {
+    display: none;
+}
+
+.btn-area {
+    position: relative;
+    height: 80px;
+    margin-bottom: 16px;
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+#Raj {
+    background: linear-gradient(135deg, #ff4d6d, #ff758c);
+    color: white;
+    position: absolute;
+    left: 60px;
+}
+
+#Annu {
+    background: #f1f1f1;
+    color: #444;
+    position: absolute;
+    right: 60px;
+}
+
+.message {
+    display: none;
+    color: #ff5c7a;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.message p {
+    margin: 16px 0;
+}
+
+.signature {
+    margin-top: 22px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #ff4d6d;
+}
+
+/* Floating particles */
+.particle {
+    position: fixed;
+    bottom: -20px;
+    font-size: 16px;
+    opacity: 0;
+    animation: floatUp 4s linear forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-110vh) scale(1.2);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1 id="question">Annu, will you be my Valentine?</h1>
+
+    <h1 id="Love" class="hidden">Happy Valentine’s Day Annu 💗</h1>
+
+    <div class="btn-area" id="area">
+        <button id="Raj">Yes</button>
+        <button id="Annu">No</button>
+    </div>
+
+    <div class="message" id="msg">
+        <p>
+            I know time passed and silence happened,  
+            but some connections don’t disappear they just pause.
+        </p>
+
+        <p>
+            You still cross my mind in the softest ways,  
+            and today felt right to say you’re special to me.
+        </p>
+
+        <div class="signature">
+            “Itni Si Baat Hai; Mujhe Tumse Pyar Hai 💝”
+        </div>
+    </div>
+
+</div>
+
+<script>
+const Raj = document.getElementById("Raj");
+const Annu = document.getElementById("Annu");
+const Love = document.getElementById("Love");
+const area = document.getElementById("area");
+const msg = document.getElementById("msg");
+const question = document.getElementById("question");
+
+function move() {
+    const w = area.offsetWidth;
+    const h = area.offsetHeight;
+
+    let x = Math.random() * (w - Annu.offsetWidth);
+    let y = Math.random() * (h - Annu.offsetHeight);
+
+    if (x > w - 140) x = w - 160;
+
+    Annu.style.left = x + "px";
+    Annu.style.top = y + "px";
+}
+
+Annu.addEventListener("mouseover", move);
+Annu.addEventListener("pointerdown", move);
+
+function createParticle() {
+    const particle = document.createElement("div");
+    particle.className = "particle";
+    particle.innerText = Math.random() > 0.5 ? "💗" : "✦";
+    particle.style.left = Math.random() * 100 + "vw";
+    particle.style.animationDuration = 3 + Math.random() * 2 + "s";
+    document.body.appendChild(particle);
+
+    setTimeout(() => {
+        particle.remove();
+    }, 5000);
+}
+
+let particleInterval;
+
+Raj.addEventListener("click", () => {
+    question.classList.add("hidden");
+    Love.classList.remove("hidden");
+    area.style.display = "none";
+    msg.style.display = "block";
+
+    particleInterval = setInterval(createParticle, 300);
+});
+</script>
+
+</body>
+</html>
